@@ -1,8 +1,9 @@
+import time
+
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 import math
-
 
 
 class BasePage():
