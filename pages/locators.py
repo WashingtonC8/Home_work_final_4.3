@@ -9,3 +9,8 @@ class ProductPageLocators():
     PRICE_ALERT = (By.CSS_SELECTOR, ".alert.alert-safe.alert-noicon.alert-info.fade.in")
     PRICE_BOOK_ALERT = (By.CSS_SELECTOR, "div .alertinner p strong")
     PRICE_BOOK_REAL = (By.CSS_SELECTOR, "div.col-sm-6.product_main p.price_color")
+
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
