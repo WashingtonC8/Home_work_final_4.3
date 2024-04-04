@@ -8,7 +8,7 @@ class ProductPage(BasePage):
         button_add_to_cart.click()
 
     def should_be_name_book_alert(self):
-        assert self.is_element_present(*ProductPageLocators.NAME_ALERT), "Alert book name is not presented"
+        assert self.is_element_present(*ProductPageLocators.BOOK_ALERT), "Alert book name is not presented"
 
     def should_be_price_book_alert(self):
         assert self.is_element_present(*ProductPageLocators.PRICE_ALERT), "Alert price is not presented"
@@ -30,3 +30,9 @@ class ProductPage(BasePage):
         r_b_p = real_book_price.text
         print(r_b_p)
         assert a_b_p == r_b_p, "the price of the books in the alert do not match the real one"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.BOOK_ALERT), "Alert price is not presented"
+
+    def should_be_success_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.BOOK_ALERT), "Alert price is not disappeared"
