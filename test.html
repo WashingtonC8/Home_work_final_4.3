@@ -1,0 +1,39 @@
+Sub ProcessData()
+    ' Сдвиг ячеек в столбцах F, G, H, I на одну строку вверх
+    Dim lastRow As Long
+    Dim i As Integer
+    
+    lastRow = Cells(Rows.Count, "F").End(xlUp).Row
+    
+    For i = 6 To 9 ' Столбцы F, G, H, I
+        Range(Cells(3, i), Cells(lastRow, i)).Cut Destination:=Cells(2, i)
+    Next i
+    
+    ' Удаление пустых строк
+    Dim rng As Range
+    Dim cell As Range
+    Dim lastRow2 As Long
+    
+    Set rng = Selection
+    lastRow2 = rng.Rows.Count
+    
+    For i = lastRow2 To 1 Step -1
+        If WorksheetFunction.CountA(rng.Rows(i)) = 0 Then
+            rng.Rows(i).EntireRow.Delete
+        End If
+    Next i
+    
+    ' Добавление новых столбцов
+    Columns("F:F").Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    Columns("G:G").Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    
+    ' Заполнение формулами новых столбцов
+    Range("F1").Value = "True_Direction"
+    Range("G1").Value = "True_Steps"
+    
+    Range("F2:F" & Cells(Rows.Count, "E").End(xlUp).Row).Formula = "=IF([@Direction]="""", """", [@Direction]&""/""&[@Section])"
+    
+    Range("G2:G" & Cells(Rows.Count, "E").End(xlUp).Row).Formula = "=IF(AND([@Preconditions]="""", [@Steps]=""""), ""Постусловие: ""&[@Postconditions], IF([@Preconditions]<>"""", ""Предусловие: ""&[@Preconditions], [@Steps]))"
+    
+    
+End Sub
